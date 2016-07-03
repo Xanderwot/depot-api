@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
 
-  has_many :attachments, dependent: :destroy
+  has_many :attachments, inverse_of: :product, dependent: :destroy
 
   validates :title, :description, :price, presence: true
   validates :price, numericality: { greater_than: 0 }

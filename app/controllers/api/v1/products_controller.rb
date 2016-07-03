@@ -7,13 +7,13 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.create(product_params)
+    @product = Product.create!(product_params)
     render 'products/show'
   end
 
   private
 
   def product_params
-    params.permit(:title, :description, :price)
+    params.permit(:title, :description, :price, attachments_attributes: [:id, :file])
   end
 end

@@ -3,7 +3,7 @@ class Attachment < ActiveRecord::Base
   mount_uploader :file, FileUploader
 
   # Change to polymorphic later
-  belongs_to :product
+  belongs_to :product, inverse_of: :attachments
 
   validates :file, :product, presence: true
 
