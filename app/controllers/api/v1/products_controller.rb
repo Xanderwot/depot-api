@@ -1,7 +1,8 @@
 class Api::V1::ProductsController < ApplicationController
 
   def index
-    @products = Product.order(created_at: :desc).page(params[:page]).per(10)
+    @products = Product.includes(:attachments).order(created_at: :desc)
+                  .page(params[:page]).per(10)
     render 'products/index'
   end
 
