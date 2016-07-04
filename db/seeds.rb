@@ -8,7 +8,8 @@
 30.times do |i|
   Product.find_or_initialize_by(title: "Product#{i}") do |product|
     product.description = 'Lorem ipsum'
-    product.price = [0.3, 0.2, 0.5].sample * i
+    product.price = rand(1.0..400.0).round(2)
+    product.attachments << Attachment.new(file: File.new(Rails.root.join('db', 'seeds', 'test-image.jpg')))
     product.save!
   end
 end
