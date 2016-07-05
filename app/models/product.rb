@@ -1,4 +1,13 @@
 class Product < ActiveRecord::Base
+  include PgSearch
+  pg_search_scope :search_by_title_and_description,
+    against: {
+      title: 'A',
+      description: 'B'
+    },
+    using: {
+      trigram: { threshold: 0.5, only: :title }
+    }
 
   has_many :attachments, inverse_of: :product, dependent: :destroy
 

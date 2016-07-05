@@ -13,9 +13,7 @@ class Api::V1::ProductsController < ApplicationController
 
   def search
     return index unless params[:q].presence
-    @products = Product.includes(:attachments)
-                  .where("to_tsvector(title || ' ' || description) @@ to_tsquery('#{params[:q]}:*')")
-                  .order(created_at: :desc).page(params[:page]).per(10)
+    @products = Product.search_by_title_and_description(params[:q]).page(params[:page]).per(10)
     render 'products/index'
   end
 
